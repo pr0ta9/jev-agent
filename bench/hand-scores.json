@@ -1,0 +1,546 @@
+{
+  "note": "Hand-scored 2026-09-22 by reading every reply. asked = facts the question literally requests; all = the full pre-registered checklist. Paraphrase accepted; a fact stated wrongly does not count.",
+  "questions": {
+    "python313": {
+      "asked": 7,
+      "all": 7,
+      "asked_are": "enable, check, limitations: every checklist fact"
+    },
+    "fiber": {
+      "asked": 6,
+      "all": 8,
+      "asked_are": "intake plus the five food groups; not 'most fall short' or soluble versus insoluble"
+    },
+    "etias": {
+      "asked": 4,
+      "all": 7,
+      "asked_are": "who, cost, validity, when; not 'not a visa', 'approved in minutes', 90/180"
+    },
+    "rudeus": {
+      "asked": 10,
+      "all": 13,
+      "asked_are": "each named person, the revenge, the time travel, the advice, the death; not the cure name, the raid, the burial"
+    }
+  },
+  "scores": {
+    "Codex Sol": {
+      "python313": [
+        7,
+        7
+      ],
+      "fiber": [
+        6,
+        6
+      ],
+      "etias": [
+        4,
+        6
+      ],
+      "rudeus": [
+        10,
+        13
+      ]
+    },
+    "Codex Astra": {
+      "python313": [
+        7,
+        7
+      ],
+      "fiber": [
+        6,
+        6
+      ],
+      "etias": [
+        4,
+        6
+      ],
+      "rudeus": [
+        10,
+        12
+      ],
+      "note": "gpt-6-astra medium with web search, the model ChatGPT defaults to; 8 to 24 searches per question"
+    },
+    "Claude Sonnet": {
+      "python313": [
+        7,
+        7
+      ],
+      "fiber": [
+        6,
+        7
+      ],
+      "etias": [
+        4,
+        6
+      ],
+      "rudeus": [
+        1,
+        3
+      ],
+      "note": "Rudeus answer fabricated: Hitogami killed, consciousness sent back"
+    },
+    "Claude Fable": {
+      "python313": [
+        7,
+        7
+      ],
+      "fiber": [
+        6,
+        8
+      ],
+      "etias": [
+        4,
+        6
+      ],
+      "rudeus": [
+        10,
+        12
+      ]
+    },
+    "Nyx, Codex psyche": {
+      "python313": [
+        6,
+        6
+      ],
+      "fiber": [
+        5,
+        5
+      ],
+      "etias": [
+        4,
+        5
+      ],
+      "rudeus": [
+        10,
+        13
+      ],
+      "note": "nous Astra composes"
+    },
+    "Nyx, Mercury psyche": {
+      "python313": [
+        6,
+        6
+      ],
+      "fiber": [
+        5,
+        5
+      ],
+      "etias": [
+        4,
+        6
+      ],
+      "rudeus": [
+        10,
+        13
+      ],
+      "note": "nous Astra composes"
+    },
+    "Nyx, Mercury psyche, nous Sol": {
+      "python313": [
+        6,
+        6
+      ],
+      "fiber": [
+        6,
+        6
+      ],
+      "etias": [
+        4,
+        4
+      ],
+      "rudeus": [
+        10,
+        13
+      ],
+      "note": "NOUS_MODEL=gpt-5.6-sol; python313 rerun once after a TypeSafe HTTP 403"
+    },
+    "Nyx, Mercury writes all": {
+      "python313": [
+        6,
+        6
+      ],
+      "fiber": [
+        6,
+        6
+      ],
+      "etias": [
+        4,
+        5
+      ],
+      "rudeus": [
+        9,
+        11
+      ],
+      "note": "NOUS_SCOPE=planning; nous never called"
+    }
+  },
+  "google": {
+    "note": "Google rubric, 2026-09-23: every fact Google AI Mode itself stated when asked the same question (answers in bench/reference-google.md). Google is the rubric, not a competitor. Scored by hand; paraphrase accepted; a fact stated wrongly does not count. Two Google statements are themselves wrong (the Rudeus instructions and 'consciousness sent back') and one is stale (ETIAS 'late 2026'); the rubric item is the topic Google covered, graded against the sources, not Google's wording.",
+    "questions": {
+      "python313": {
+        "n": 10,
+        "items": [
+          "separate free-threaded executable python3.13t; the standard build keeps the GIL",
+          "how to get it: installer option, deadsnakes package, or ./configure --disable-gil",
+          "check with sys._is_gil_enabled()",
+          "python3.13t -VV prints 'experimental free-threading build'",
+          "runtime override with -X gil or PYTHON_GIL",
+          "experimental status",
+          "C extensions without Py_MOD_GIL_NOT_USED make CPython re-enable the GIL",
+          "single-threaded overhead",
+          "thread safety is still your responsibility (locks)",
+          "higher memory use"
+        ]
+      },
+      "fiber": {
+        "n": 10,
+        "items": [
+          "25 g women / 38 g men",
+          "21 / 30 g after 50",
+          "14 g per 1,000 kcal",
+          "most adults fall short of the target",
+          "legumes with per-serving grams",
+          "seeds and nuts (chia, almonds)",
+          "fruits (raspberries, blackberries, pears, apples)",
+          "vegetables (artichoke, green peas, broccoli)",
+          "whole grains (barley, oats)",
+          "increase gradually and hydrate"
+        ]
+      },
+      "etias": {
+        "n": 11,
+        "items": [
+          "not a visa; an electronic permit linked to the passport",
+          "visa-exempt nationals (59 countries; US, Canada, Australia, Japan, UK)",
+          "30 European countries (29 Schengen plus Cyprus)",
+          "stays up to 90 days in any 180",
+          "fee 20 euros",
+          "fee waived under 18, over 70, EU family members",
+          "valid 3 years or until the passport expires",
+          "multiple entries during validity",
+          "launch status and timing",
+          "EU announces the date months ahead; goes live after EES",
+          "apply only through the official EU platform"
+        ]
+      },
+      "rudeus": {
+        "n": 11,
+        "items": [
+          "Roxy: infected rat in the basement contaminates the food; pregnant Roxy dies of Magic Stone disease",
+          "Cliff: steals the restricted book from the Milis church with Rudeus and Zanoba, is poisoned, dies",
+          "Sylphy: Rudeus drinks, she leaves for Asura, joins Ariel's coup, executed with Luke",
+          "Eris: dies protecting him; he learns of her love only then",
+          "Zanoba, Aisha, Ginger, Julie killed in the temple knights' raid",
+          "revenge: decades of war on Hitogami's side, never reaches him",
+          "one-way time-travel magic developed in his final years at enormous mana cost",
+          "hands over his diary",
+          "instructions to his past self (graded against the source: Nanahoshi, letter to Eris, doubt Hitogami)",
+          "dies in the basement from the spell's damage after the warning",
+          "proves his identity to his past self (Japanese name, pop-culture references)"
+        ]
+      }
+    },
+    "scores": {
+      "Codex Sol": {
+        "python313": 10,
+        "fiber": 9,
+        "etias": 9,
+        "rudeus": 10
+      },
+      "Codex Astra": {
+        "python313": 10,
+        "fiber": 9,
+        "etias": 9,
+        "rudeus": 10
+      },
+      "Claude Sonnet": {
+        "python313": 9,
+        "fiber": 9,
+        "etias": 9,
+        "rudeus": 3
+      },
+      "Claude Fable": {
+        "python313": 10,
+        "fiber": 10,
+        "etias": 11,
+        "rudeus": 10
+      },
+      "Nyx, Codex psyche": {
+        "python313": 10,
+        "fiber": 7,
+        "etias": 9,
+        "rudeus": 10
+      },
+      "Nyx, Mercury psyche": {
+        "python313": 10,
+        "fiber": 6,
+        "etias": 9,
+        "rudeus": 10
+      },
+      "Nyx, Mercury psyche, nous Sol": {
+        "python313": 10,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 10
+      },
+      "Nyx, Mercury writes all": {
+        "python313": 9,
+        "fiber": 8,
+        "etias": 9,
+        "rudeus": 9
+      }
+    },
+    "misses": {
+      "Codex Sol": "fiber: most fall short; ETIAS: announce/EES, official-site warning; Rudeus: identity proof",
+      "Codex Astra": "fiber: most fall short; ETIAS: announce/EES, official-site warning; Rudeus: identity proof",
+      "Claude Sonnet": "python: memory; fiber: 14 g per 1,000 kcal; ETIAS: 30 countries, announce/EES; Rudeus: only the time travel, a vague warning and the death are right",
+      "Claude Fable": "Rudeus: identity proof",
+      "Nyx, Codex psyche": "fiber: most fall short, whole grains, gradual tip; ETIAS: announce/EES, official-site warning; Rudeus: identity proof",
+      "Nyx, Mercury psyche": "fiber: 14 g per 1,000 kcal, most fall short, whole grains, gradual tip; ETIAS: announce/EES, official-site warning; Rudeus: identity proof",
+      "Nyx, Mercury psyche, nous Sol": "fiber: 25/38 (gives 25-28/28-34 instead), over-50 numbers, most fall short, gradual tip; ETIAS: not a visa, 90/180, multiple entries, official-site warning; Rudeus: identity proof",
+      "Nyx, Mercury writes all": "python: thread safety; fiber: most fall short, gradual tip; ETIAS: not a visa, official-site warning; Rudeus: the rat, identity proof"
+    },
+    "essential": {
+      "note": "Essential subset, 2026-09-23: a Google item is essential when it is the direct answer to a sub-question the user asked, at the detail needed to act on it. Everything else Google said is context and is dropped here. Numbers are 1-based indices into the Google items.",
+      "python313": {
+        "keep": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8
+        ],
+        "dropped": {
+          "4": "-VV is a second way to check; one check answers the question",
+          "9": "thread safety being your job is a caveat, not a limitation of the mode",
+          "10": "memory use is a secondary limitation"
+        }
+      },
+      "fiber": {
+        "keep": [
+          1,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "dropped": {
+          "2": "over-50 targets refine the headline number",
+          "3": "14 g per 1,000 kcal is an alternative rule",
+          "4": "most adults fall short is context",
+          "10": "the gradual-increase tip is advice, not asked"
+        },
+        "borderline": "9 whole grains: kept because the question says common foods and every guide lists grains, though per serving they rank below legumes and berries"
+      },
+      "etias": {
+        "keep": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          9
+        ],
+        "dropped": {
+          "4": "90/180 is a stay rule, not asked",
+          "8": "multiple entries is a validity detail",
+          "10": "announcement lead time and EES are context",
+          "11": "the official-site warning is advice"
+        }
+      },
+      "rudeus": {
+        "keep": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10
+        ],
+        "dropped": {
+          "8": "handing over the diary is the medium of the warning, not its content",
+          "11": "the identity proof is narrative detail"
+        }
+      },
+      "note_2026_09_23_new_digest": "Rows marked 'new digest' ran on the jev-digest evidence format (digest_evidence, about 1.5k tokens) on 2026-09-23 evening; Codex Luna and Claude Haiku were added the same evening, Codex with --ignore-user-config.",
+      "note_2026_09_24_release": "Rows marked 'release' ran on 2026-09-24 on the release code: new digest format, fact verification, questions isolated from recent turns and earlier vault contents. Codex Sol and Astra were rerun the same day with --ignore-user-config; both still score 29. Rows scored before 2026-09-24 ran with recent turns and vault notes from earlier rows in context.",
+      "note_2026_09_24_dispatch": "Rows marked 'dispatch' ran after nous became a dispatched full agent (2026-09-24 afternoon); no question dispatched in any of the three runs.",
+      "note_2026_09_24_checklist": "Rows marked 'checklist' ran with EXPECT_CHECK=1 on the dispatch design; python313 dispatched in run 1 (7 of 7)."
+    },
+    "scores_essential": {
+      "Codex Sol": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Codex Astra": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Claude Sonnet": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 6,
+        "rudeus": 3
+      },
+      "Claude Fable": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Nyx, Codex psyche": {
+        "python313": 7,
+        "fiber": 5,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Nyx, Mercury psyche": {
+        "python313": 7,
+        "fiber": 5,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Nyx, Mercury psyche, nous Sol": {
+        "python313": 7,
+        "fiber": 5,
+        "etias": 6,
+        "rudeus": 9
+      },
+      "Nyx, Mercury writes all": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 6,
+        "rudeus": 8
+      },
+      "Codex Luna": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Claude Haiku": {
+        "python313": 5,
+        "fiber": 6,
+        "etias": 6,
+        "rudeus": 3
+      },
+      "Nyx new digest, Mercury + Astra": {
+        "python313": 5,
+        "fiber": 4,
+        "etias": 7,
+        "rudeus": 9
+      },
+      "Nyx new digest, Mercury + Sol": {
+        "python313": 4,
+        "fiber": 4,
+        "etias": 6,
+        "rudeus": 9
+      },
+      "Nyx new digest, Mercury writes all": {
+        "python313": 4,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 6
+      },
+      "Nyx release, Mercury + Astra": {
+        "python313": 4,
+        "fiber": 4,
+        "etias": 7,
+        "rudeus": 8
+      },
+      "Nyx release, Mercury + Sol": {
+        "python313": 4,
+        "fiber": 6,
+        "etias": 6,
+        "rudeus": 8
+      },
+      "Nyx release, Mercury writes all, run 1": {
+        "python313": 4,
+        "fiber": 0,
+        "etias": 6,
+        "rudeus": 9
+      },
+      "Nyx release, Mercury writes all, run 2": {
+        "python313": 4,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 8
+      },
+      "Nyx release, Mercury writes all, run 3": {
+        "python313": 4,
+        "fiber": 6,
+        "etias": 6,
+        "rudeus": 8
+      },
+      "Nyx dispatch, Mercury writes all, run 1": {
+        "python313": 4,
+        "fiber": 5,
+        "etias": 7,
+        "rudeus": 7
+      },
+      "Nyx dispatch, Mercury writes all, run 2": {
+        "python313": 3,
+        "fiber": 6,
+        "etias": 5,
+        "rudeus": 8
+      },
+      "Nyx dispatch, Mercury writes all, run 3": {
+        "python313": 5,
+        "fiber": 5,
+        "etias": 5,
+        "rudeus": 7
+      },
+      "Nyx checklist, run 1": {
+        "python313": 7,
+        "fiber": 6,
+        "etias": 7,
+        "rudeus": 7
+      },
+      "Nyx checklist, run 2": {
+        "python313": 4,
+        "fiber": 6,
+        "etias": 6,
+        "rudeus": 7
+      },
+      "Nyx checklist, run 3": {
+        "python313": 4,
+        "fiber": 4,
+        "etias": 0,
+        "rudeus": 7
+      }
+    },
+    "misses_essential": {
+      "Claude Sonnet": "ETIAS: 30 countries; Rudeus: only the time travel, a vague warning and the death",
+      "Nyx, Codex psyche": "fiber: whole grains",
+      "Nyx, Mercury psyche": "fiber: whole grains",
+      "Nyx, Mercury psyche, nous Sol": "fiber: 25/38 (gives 25-28/28-34); ETIAS: not a visa",
+      "Nyx, Mercury writes all": "ETIAS: not a visa; Rudeus: the rat",
+      "Claude Haiku": "python: -X gil, C extensions re-enable the GIL; ETIAS: not a visa; Rudeus: only the time travel, a vague warning and the death. Searched only on ETIAS; ran with an appended instruction to answer general questions because without it Claude Code refused fiber and Rudeus as off-topic",
+      "Nyx new digest, Mercury + Astra": "python: -X gil, C extensions re-enable the GIL (neither in the evidence); fiber: 25/38, fruits (both in the evidence)",
+      "Nyx new digest, Mercury + Sol": "python: -X gil, C extensions (not in the evidence), experimental; fiber: fruits, whole grains; ETIAS: not a visa / linked to the passport (all in the evidence)",
+      "Nyx new digest, Mercury writes all": "python: -X gil, C extensions (not in the evidence), experimental; Rudeus: the rat, learning of Eris's love, revenge never reaching Hitogami (all in the evidence)",
+      "Nyx release, Mercury + Astra": "python: -X gil, experimental, C extensions re-enable the GIL; fiber: fruits, whole grains; Rudeus: learning of Eris's love",
+      "Nyx release, Mercury + Sol": "python: -X gil, experimental, C extensions; ETIAS: 30 countries; Rudeus: learning of Eris's love",
+      "Nyx release, Mercury writes all, run 1": "python: -X gil, experimental, C extensions; fiber: the web search returned no results (search engines rate-limited) and Nyx asked to retry; ETIAS: not a visa / linked to the passport",
+      "Nyx release, Mercury writes all, run 2": "python: -X gil, experimental, single-threaded overhead; Rudeus: learning of Eris's love",
+      "Nyx release, Mercury writes all, run 3": "python: -X gil, experimental, C extensions; ETIAS: not a visa; Rudeus: learning of Eris's love",
+      "Nyx dispatch, Mercury writes all, run 1": "python: -X gil, experimental, C extensions; fiber: 38 g for men; Rudeus: Eris's love, revenge never reaching Hitogami",
+      "Nyx dispatch, Mercury writes all, run 2": "python: -X gil, experimental, C extensions, single-threaded overhead; ETIAS: not a visa, 30 countries; Rudeus: Eris's love",
+      "Nyx dispatch, Mercury writes all, run 3": "python: -X gil, experimental; fiber: whole grains; ETIAS: not a visa, 30 countries; Rudeus: Eris's love, revenge never reaching Hitogami",
+      "Nyx checklist, run 1": "Rudeus: Eris's love, revenge never reaching Hitogami",
+      "Nyx checklist, run 2": "python: -X gil, experimental, C extensions (no dispatch); ETIAS: not a visa; Rudeus: the rat, Eris's fate",
+      "Nyx checklist, run 3": "python: -X gil, experimental, C extensions (no dispatch); fiber: fruits, whole grains; ETIAS: search engines rate-limited, Nyx asked to retry; Rudeus: Eris's love, revenge"
+    }
+  }
+}

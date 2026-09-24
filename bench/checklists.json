@@ -1,0 +1,62 @@
+{
+  "note": "Pre-registered fact checklists. Each fact is a list of regex groups; a text contains the fact when every group matches (case-insensitive). Scoring is mechanical and identical for every system; it measures whether the load-bearing facts survive into the context handed to a writer, not answer prose quality.",
+  "python313": {
+    "query": "How do I enable free-threaded (no-GIL) mode in Python 3.13, how do I check it is active, and what are its current limitations?",
+    "search_query": "Python 3.13 free-threaded mode enable limitations",
+    "facts": {
+      "separate free-threaded build (python3.13t / --disable-gil)": [["3\\.13t|python3\\.13t|--disable-gil|nogil"]],
+      "runtime toggle PYTHON_GIL / -X gil": [["PYTHON_GIL|-X gil|-X ?gil="]],
+      "check with sys._is_gil_enabled()": [["_is_gil_enabled"]],
+      "experimental status": [["experimental"]],
+      "single-threaded performance penalty": [["single.thread|slower|overhead|performance (penalty|cost|hit)"]],
+      "C extensions must opt in / GIL re-enabled otherwise": [["extension"], ["Py_mod_gil|Py_MOD_GIL_NOT_USED|re-?enable|compatib"]],
+      "specializing interpreter / optimizations disabled": [["specializ|adaptive interpreter|JIT|optimi"]]
+    }
+  },
+  "fiber": {
+    "query": "What is the recommended daily dietary fiber intake for adults, and which common foods are highest in fiber?",
+    "search_query": "recommended daily fiber intake adults high fiber foods",
+    "facts": {
+      "25 g women / 38 g men or 14 g per 1,000 kcal": [["25|14 ?g"], ["38|1,?000 (calories|kcal)"]],
+      "most adults fall short": [["fall short|less than|under|only about|most (americans|adults|people)"]],
+      "legumes (beans, lentils, chickpeas)": [["bean|lentil|chickpea|legume"]],
+      "whole grains (oats, barley, whole wheat)": [["oat|barley|whole.grain|whole.wheat"]],
+      "fruits (raspberries, pears, apples with skin)": [["raspberr|pear|apple"]],
+      "vegetables (artichoke, broccoli, peas)": [["artichoke|broccoli|green peas|brussels"]],
+      "seeds and nuts (chia, almonds)": [["chia|almond|flax|seed"]],
+      "soluble vs insoluble fiber": [["soluble"], ["insoluble"]]
+    }
+  },
+  "etias": {
+    "query": "What is the EU ETIAS travel authorization: who needs it; how much it costs; how long it is valid; when it becomes mandatory?",
+    "search_query": "ETIAS travel authorization who needs it cost validity start date",
+    "facts": {
+      "visa-exempt non-EU nationals to the Schengen area": [["visa.?(exempt|free|waiver)"], ["schengen|30 (european )?countries|29 "]],
+      "authorization linked to passport, not a visa": [["not a visa|is not a (european )?(travel )?visa|pre-travel|linked to (your |the )?(passport|travel document)"]],
+      "fee amount in euros with age exemptions": [["€ ?\\d+|EUR ?\\d+|\\d+ euros?"], ["under (the age of )?18|over (the age of )?70"]],
+      "valid three years or until passport expires": [["three years|3 years"], ["passport|travel document"]],
+      "launch timing and transition / grace period": [["2026|2027"], ["transition|grace period"]],
+      "online application, most approved within minutes": [["online"], ["minutes"]],
+      "short stays up to 90 days in 180": [["90[ -]days?"], ["180"]]
+    }
+  },
+  "rudeus": {
+    "query": "Future Rudeus (Oldeus) in Mushoku Tensei: what happened to Roxy, Sylphy, Eris, Cliff, Zanoba and his family in his timeline; his revenge against Hitogami; how he learned to travel back in time; what he told his past self; how he died.",
+    "search_query": "Future Rudeus Mushoku Tensei Oldeus timeline",
+    "facts": {
+      "basement rat with Petrification / Magic Stone disease infected Roxy": [["basement"], ["petrification|magic stone|stone disease|magic-stone"]],
+      "only God-tier detoxification could cure": [["god.?(tier|rank|class|level)"], ["detox"]],
+      "Church raid for the book / stole it": [["church|cathedral|milis"], ["book"]],
+      "Cliff poisoned, died days later": [["cliff"], ["poison"]],
+      "Roxy already dead on return": [["roxy"], ["already (dead|died|succumbed|passed)|had already"]],
+      "Sylphy leaves, Ariel, Asura, coup or death": [["sylph"], ["ariel|asura|coup"]],
+      "Eris returns, driven away / tortured or dies vs Atofe": [["eris"], ["tortur|apostle|drove her away|drive her away|pushed her away|atofe"]],
+      "Zanoba/Julie/Ginger/Aisha killed, Templar massacre": [["zanoba"], ["templar|milis|ranoa|knights|murder|killed"]],
+      "decades hunting Hitogami, Demon Kings, never reached him": [["hitogami|man.?god"], ["demon (king|lord)|decades|50 years|fifty years"]],
+      "time travel magic at end of life": [["time.?travel|past-transfer|time regression|travel back|go back in time|back in time"]],
+      "organs lost, dies after warning, diary": [["organ"], ["diary"]],
+      "advice: Nanahoshi / letter to Eris / doubt Hitogami": [["nanahoshi"], ["letter|eris"]],
+      "burial with Paul / rat to Magic Guild": [["paul|guild|urn|ashes|burn"]]
+    }
+  }
+}
