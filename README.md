@@ -221,4 +221,4 @@ writers still drop sub-facts they were given, and public search engines rate-lim
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE). The Google AI Mode answers quoted in [bench/reference-google.md](bench/reference-google.md) are Google's text, used only as the scoring rubric, and are not covered by the MIT license.

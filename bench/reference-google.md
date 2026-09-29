@@ -1,6 +1,6 @@
 # Reference answers: Google AI Mode, 2026-09-23
 
-Captured from google.com AI Mode (udm=50) in a desktop browser, same wording as the benchmark questions; condensed by hand, facts kept verbatim.
+Captured from google.com AI Mode (udm=50) in a desktop browser, same wording as the benchmark questions; condensed by hand, facts kept verbatim. The quoted answers are Google's text, used here only as the scoring rubric; they are not covered by this repository's MIT license.
 
 ## python313
 
