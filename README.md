@@ -17,9 +17,11 @@ jev-agent splits the work:
 - **Code** turns confident answers into actions, runs tools in parallel, and owns every loop, budget and stop.
 - **Psyche (Mercury 2.5, or Codex Luna)** writes replies from the evidence and renders them in Nyx's voice. It runs
   blind: no tools, no web.
-- **Nous is a full agent** (Codex, Luna by default) that Jev dispatches when nothing is confident or when a checked
-  aspect of the answer is still missing. It does its own research, writes only inside its own folder under
-  `vault/work/`, and has no timeout. The harness picks up its answer and files; memory and habits stay the harness's.
+- **Nous is the strong model, whichever one you configure** (`NOUS_MODEL`; GPT-6 Astra in `.env.example`). With the
+  release default `NOUS_SCOPE=planning` it only plans, and only when Jev has no confident move. When nothing is
+  confident or a checked aspect of the answer is still missing, Jev dispatches a full agent (Codex, `DISPATCH_MODEL`,
+  Luna by default) that does its own research, writes only inside its own folder under `vault/work/`, and has no
+  timeout. The harness picks up its answer and files; memory and habits stay the harness's.
 - **Habits** are learned from accepted runs: a drafted workflow is promoted only after a later run reproduces it,
   then replays with no model choosing steps.
 
@@ -30,12 +32,15 @@ the passages that answer the question, with their URLs.
 ## Results
 
 Four research questions (Python 3.13 free-threading, dietary fibre, the EU's ETIAS, and a Mushoku Tensei plot
-question), scored by hand against the essential facts in Google AI Mode's own answers, 29 in total. Every agent ran
-isolated from local configuration.
+question). Google AI Mode's own answer to each question is the rubric: its essential facts, the ones that directly
+answer what was asked, number 29 in total. One scorer, the author, read every reply and scored it by hand; paraphrase
+counts, a fact stated wrongly does not. Every agent ran isolated from local configuration.
 
 | agent | essential facts /29 | seconds, 4 questions | cost |
 |---|---:|---:|---:|
-| **Nyx, release default** (best of 3 runs) | 27 | 104 | $0.24 |
+| **Nyx, release default, run 1** | 27 | 104 | $0.24 |
+| **Nyx, release default, run 2** | 23 | 90 | about $0.10 |
+| **Nyx, release default, run 3** | 15 | 62 | about $0.05 |
 | Nyx, Mercury + Sol nous | 24 | 105 | $0.63 |
 | Codex Luna | 29 | 210 | $0.79 |
 | Codex Sol | 29 | 298 | $4.44 |
@@ -44,9 +49,15 @@ isolated from local configuration.
 | Claude Sonnet | 22 | 75 | $0.34 |
 | Claude Haiku | 20 | 72 | $0.19 |
 
-What this shows: at its best, Nyx gets 27 of 29 essential facts in half the time of the fastest full agent for
-under a third of the cost. It answers from one web digest, checks its own reply against an expert's checklist of what
-a complete answer needs, and hands only the gaps to a Codex agent: here, one of the four questions.
+What this shows: the three Nyx runs score 27, 23 and 15 of 29, a median of 23. At its best, Nyx gets 27 of 29
+essential facts in half the time of the fastest full agent for under a third of the cost; the median run gives up six
+facts to Codex Luna in under half the time for about an eighth of the cost. Run 3 scored 15 because the public search
+engines behind SearXNG were rate-limited on the ETIAS question: Nyx said so and asked to retry instead of answering
+from nothing, which scores 0 of 7 there. It answers from one web digest, checks its own reply against an expert's
+checklist of what a complete answer needs, and hands only the gaps to a Codex agent: in runs 1 and 2, one of the four
+questions each.
+Costs are list prices from token counts; Claude runs are what Claude Code reports. Mercury 2.5 is priced at its
+launch discount ($0.04/$0.15 per million tokens); at the standard $0.20/$0.75, each Nyx run costs under a cent more.
 Four questions and one scorer is a proof of concept, not a benchmark. Method, per-question results, where each
 missed fact was lost (the digest or the writer), and how to reproduce: [bench/questions.md](bench/questions.md).
 
@@ -71,7 +82,7 @@ python -m venv .venv
 cp .env.example .env                       # fill in TYPESAFE_API_KEY and MERCURY_API_KEY
 .venv/bin/nyx "What is the EU ETIAS travel authorization?"
 .venv/bin/nyx --accept traces/<trace>.jsonl     # accept a run: drafts or verifies a habit
-.venv/bin/python -m pytest                 # 83 tests, no network
+.venv/bin/python -m pytest                 # 89 tests, no network
 ```
 
 The first two lines only start the search service; jev-digest itself is installed from GitHub as a dependency.
@@ -83,9 +94,9 @@ The first two lines only start the search service; jev-digest itself is installe
 | [docs/DESIGN.md](docs/DESIGN.md) | the specification: glossary, control loop, decision catalog, slot ladder, learning, persona, and the measurement behind every rule |
 | [docs/STATUS.md](docs/STATUS.md) | where the proof stands, known issues, open questions |
 | `soma/` | the proof: 16 files, about 1,150 lines. `loop.py` is the round; `questions.py` holds every question Jev is asked |
-| `prompts/` | the writer, planner, proposer, habit-drafter and voice prompts |
+| `prompts/` | the writer, dispatched-agent, expert-checklist, proposer, habit-drafter and voice prompts |
 | `bench/` | the acceptance set, baseline runners, hand scores and the Google rubric |
-| `tests/` | 83 tests with a fake Jev, fake writers and a fake agent |
+| `tests/` | 89 tests with a fake Jev, fake writers and a fake agent |
 
 ## Status
 

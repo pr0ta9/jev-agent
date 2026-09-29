@@ -4,7 +4,7 @@ DESIGN.md is the specification; this file is where the proof of concept stands a
 
 ## Where the proof stands
 
-- `soma/` implements DESIGN.md §15 in 16 files and about 1,150 non-blank lines, with 83 tests (fake Jev, fake
+- `soma/` implements DESIGN.md §15 in 16 files and about 1,150 non-blank lines, with 89 tests (fake Jev, fake
   writers, no network).
 - Nous is a dispatched full agent (Codex Luna by default) since 2026-09-24: Jev dispatches it on a no-move, and on
   an aspect still missing after the rewrite when Jev says more research could answer it. It writes only in
