@@ -6,7 +6,8 @@ DESIGN.md is the specification; this file is where the proof of concept stands a
 
 - `soma/` implements DESIGN.md §15 in 16 files and about 1,150 non-blank lines, with 89 tests (fake Jev, fake
   writers, no network).
-- Nous is a dispatched full agent (Codex Luna by default) since 2026-09-24: Jev dispatches it on a no-move, and on
+- Nous is a dispatched full agent (Codex, `DISPATCH_MODEL`, Luna by default; the harder calls use `NOUS_MODEL`, Astra
+  in `.env.example`; both can be any model the task needs) since 2026-09-24: Jev dispatches it on a no-move, and on
   an aspect still missing after the rewrite when Jev says more research could answer it. It writes only in
   `vault/work/<trace id>/`, has no timeout, and the harness records its files.
 - With the release default (`PSYCHE_PROVIDER=mercury NOUS_SCOPE=planning EXPECT_CHECK=1`) the best of three runs

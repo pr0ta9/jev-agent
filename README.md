@@ -17,11 +17,11 @@ jev-agent splits the work:
 - **Code** turns confident answers into actions, runs tools in parallel, and owns every loop, budget and stop.
 - **Psyche (Mercury 2.5, or Codex Luna)** writes replies from the evidence and renders them in Nyx's voice. It runs
   blind: no tools, no web.
-- **Nous is the strong model, whichever one you configure** (`NOUS_MODEL`; GPT-6 Astra in `.env.example`). With the
-  release default `NOUS_SCOPE=planning` it only plans, and only when Jev has no confident move. When nothing is
-  confident or a checked aspect of the answer is still missing, Jev dispatches a full agent (Codex, `DISPATCH_MODEL`,
-  Luna by default) that does its own research, writes only inside its own folder under `vault/work/`, and has no
-  timeout. The harness picks up its answer and files; memory and habits stay the harness's.
+- **Nous is the strong side, and its models are whatever the task needs.** When nothing is confident or a checked
+  aspect of the answer is still missing, Jev dispatches a full agent (Codex, `DISPATCH_MODEL`, Luna by default) that
+  does its own research, writes only inside its own folder under `vault/work/`, and has no timeout; the harder calls
+  go to `NOUS_MODEL` (GPT-6 Astra in `.env.example`). Both can be set to any model that suits the work. The harness
+  picks up the answer and files; memory and habits stay the harness's.
 - **Habits** are learned from accepted runs: a drafted workflow is promoted only after a later run reproduces it,
   then replays with no model choosing steps.
 
