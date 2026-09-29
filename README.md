@@ -31,42 +31,45 @@ the passages that answer the question, with their URLs.
 
 ## Results
 
-Four research questions (Python 3.13 free-threading, dietary fibre, the EU's ETIAS, and a Mushoku Tensei plot
-question). Google AI Mode's own answer to each question is the rubric: its essential facts, the ones that directly
-answer what was asked, number 29 in total. One scorer, the author, read every reply and scored it by hand; paraphrase
-counts, a fact stated wrongly does not. Every agent ran isolated from local configuration.
-
-![Key facts found against total time for Nyx and five full agents](docs/results.png)
-
 Nyx run by Jev alone, with Mercury writing and no Codex model at all, got 25 of 29 essential facts in 47 seconds for
 five cents. With nous, the Codex agent Jev dispatches for gaps, it got 27 of 29 in 104 seconds for $0.24: half the
 time of the fastest agent that got all 29, for under a third of its cost.
 
-| agent | essential facts /29 | seconds, 4 questions | cost |
-|---|---:|---:|---:|
-| **Nyx, Jev only** (best of three runs) | 25 | 47 | $0.05 |
-| **Nyx with nous** (best of three runs; the release default) | 27 | 104 | $0.24 |
-| Codex Luna | 29 | 210 | $0.79 |
-| Codex Sol | 29 | 298 | $4.44 |
-| Claude Fable | 29 | 438 | $3.48 |
-| Codex Astra | 29 | 630 | $11.62 |
-| Claude Sonnet | 22 | 75 | $0.34 |
-| Claude Haiku | 20 | 72 | $0.19 |
-
-Both Nyx variants have Jev decide every step and Mercury 2.5 write every reply. "Jev only" never calls a Codex model;
-"with nous" adds the expert checklist and dispatches Codex Luna for the gaps Jev confirms. Each full agent ran once;
-Claude Sonnet invented its Mushoku Tensei answer, and Claude Haiku ran with one added instruction to answer general
-questions, because inside Claude Code it otherwise refused two as off-topic.
+| Nyx, Jev only | Nyx with nous | Best full agent |
+|---|---|---|
+| **25 / 29** · 47 s · $0.05 · no Codex call | **27 / 29** · 104 s · $0.24 · one question dispatched | **29 / 29** · Codex Luna · 210 s · $0.79 |
 
 [![Nyx answering the ETIAS question](docs/media/nyx-etias.gif)](docs/media/nyx-etias.mp4)
 
-The ETIAS question, replayed from the run's own trace: every decision Jev made, each tool call and the writer.
-16.5 s, 7 of 7 essential facts, no agent needed.
+Nyx answering the ETIAS question: every decision Jev made, each tool call and the writer, replayed from the run's own
+trace. 16.5 s, 7 of 7 essential facts, no agent needed. Click for the full-quality video.
 
-[![Nyx answering the Python question with one agent dispatch](docs/media/nyx-python.gif)](docs/media/nyx-python.mp4)
+### Standings
 
-The Python question: the expert checklist finds two gaps, Jev dispatches a Codex agent, and the final answer scores
-7 of 7. Long waits are shortened on screen; every time shown is real. Click either replay for the full-quality video.
+Four questions (Python 3.13 free-threading, dietary fibre, the EU's ETIAS, and a Mushoku Tensei plot question), each
+scored by hand against the essential facts in Google AI Mode's own answer to the same question. Every agent ran
+isolated from local configuration.
+
+![Key facts found against total time for Nyx and five full agents](docs/results.png)
+
+Seconds on a log scale. The table below holds the same data.
+
+| Agent | Facts /29 | Seconds | Cost | Search |
+|---|---:|---:|---:|---|
+| Nyx, Jev only (best of three runs) | 25 | 47 | $0.05 | one digest per question; Mercury writes; no Codex call |
+| Nyx with nous (best of three runs) | 27 | 104 | $0.24 | one digest per question; the Python question sent to the Codex agent |
+| Codex Luna | 29 | 210 | $0.79 | 8–12 searches per question |
+| Codex Sol | 29 | 298 | $4.44 | 6–14 |
+| Claude Fable | 29 | 438 | $3.48 | on 2 of 4 questions |
+| Codex Astra | 29 | 630 | $11.62 | 6–18 |
+| Claude Sonnet | 22 | 75 | $0.34 | once; its Rudeus answer is invented |
+| Claude Haiku | 20 | 72 | $0.19 | once; answered the rest from memory |
+
+Both Nyx variants have Jev decide every step and Mercury 2.5 write every reply. "Jev only" never calls a Codex model;
+"with nous" adds the expert checklist and dispatches Codex Luna for the gaps Jev confirms, which is the release
+default. Fable and Sonnet ran on 2026-09-23; Haiku ran with one added instruction to answer general questions, because
+inside Claude Code it otherwise refused two as off-topic. Every run of every configuration is in
+[bench/questions.md](bench/questions.md) and in the table below.
 
 <details>
 <summary>Every run of every configuration</summary>
@@ -85,10 +88,93 @@ The Python question: the expert checklist finds two gaps, Jev dispatches a Codex
 
 </details>
 
-Costs are list prices from token counts; Claude runs are what Claude Code reports. Mercury 2.5 is priced at its
-launch discount ($0.04/$0.15 per million tokens); at the standard $0.20/$0.75, each Nyx run costs under a cent more.
-Four questions and one scorer is a proof of concept, not a benchmark. Method, per-question results, where each
-missed fact was lost (the digest or the writer), and how to reproduce: [bench/questions.md](bench/questions.md).
+### Question by question
+
+| Question | Jev only | With nous | What changed |
+|---|---:|---:|---|
+| Python 3.13 free-threading | 4 / 7 · 11.6 s | 7 / 7 · 65.1 s | The expert checklist found two of its six items unanswered; Jev sent the draft and the gaps to the Codex agent, which filled them in 53 s: the separate `python3.13t` build, C extensions turning the GIL back on, and the "experimental" status. |
+| Dietary fibre | 6 / 6 · 10.4 s | 6 / 6 · 12.3 s | Nothing missing either way. |
+| EU ETIAS | 7 / 7 · 13.1 s | 7 / 7 · 16.5 s | Nothing missing either way (the replay above). |
+| Mushoku Tensei | 8 / 9 · 12.3 s | 7 / 9 · 10.0 s | Not dispatched; the writer dropped one more detail in this run (see below). |
+| **Total** | **25 · 47 s** | **27 · 104 s** | The agent added three facts on the one question it saw; the rest is run-to-run variance in what the writer keeps. |
+
+### Why the agent did not bring it to 29
+
+The agent only works on what Jev sends it, and in this run Jev sent it one question. The two facts still missing are
+both on Mushoku Tensei: that Rudeus learned of Eris's love only after her death, and that his revenge never reached
+Hitogami. Both were in the evidence the writer had; Mercury left them out. Jev's checks then judged the reply
+complete: all nine aspects covered, all five checklist items answered, and "could more research help?" answered no
+(0.53). So nothing was dispatched, and the gap stayed.
+
+In other words, the checks catch a missing *topic* well (Python's limitations) but not a missing *detail* inside a
+topic the reply already covers (what happened to Eris is covered; that he learned of her love afterwards is not).
+Asking the checklist for those details, or checking the writer's reply sentence by sentence against the passages it
+was given, is the next step toward 29.
+
+### Nyx checks whether its answer is complete
+
+Nyx always verified its draft, but only against what it already had: the aspects of the question and the passages its
+web digest returned. That check cannot notice a fact the digest never fetched. On Python, Jev marked "limitations"
+covered in every run while two limitations the rubric expects were missing. A Codex agent notices, because it knows
+what a complete answer contains, and keeps searching.
+
+Nyx now does the same in its own way: a generator proposes and Jev judges.
+
+| Step | What happens | Time |
+|---|---|---:|
+| Expert checklist | Mercury lists what a complete, expert answer must settle, as specific questions ("which extensions turn the GIL back on?"). | ~1 s |
+| Jev judges | In the same verifying round, Jev marks each item answered, missing or not needed, and asks for the specific answer, not just the topic. | <1 s |
+| Gaps go to the agent | Confidently missing items, when Jev says more research could answer them, go to a Codex agent with the draft. It researches on its own, writes only in its work folder, and its answer is checked again. | ~40–55 s |
+
+[![Nyx answering the Python question with one agent dispatch](docs/media/nyx-python.gif)](docs/media/nyx-python.mp4)
+
+The Python question: the checklist finds two gaps, Jev dispatches a Codex agent, and the final answer scores 7 of 7.
+Long waits are shortened on screen; every time shown is real.
+
+On the Python question the effect is direct: whenever the checklist sent the gaps to the agent, the answer scored
+**7 of 7**, against 3 to 5 before. When nothing is missing, as with fibre and ETIAS, the check costs about a second
+and nothing leaves Nyx.
+
+### Nous, the dispatched agent
+
+| When | What happens |
+|---|---|
+| A checked gap more research could answer | The agent gets the draft and the missing points, and returns a complete answer. |
+| No confident move in a round | The whole request goes to the agent, once per request. |
+| The agent runs | Codex Luna (or the stronger nous model when the output leaves the vault), with its own web search, writing only in `vault/work/<trace id>/`, and no timeout: it returns an answer or an error. |
+| It returns | Jev verifies the answer like any draft, Nyx's voice renders it, and the harness records and indexes the files the agent wrote. Memory and habits stay the harness's. |
+
+### What is left
+
+The two facts the best run missed, both on Mushoku Tensei (that Rudeus learned of Eris's love only after her death,
+and that his revenge never reached Hitogami), were in the evidence; the writer left them out. Next steps, in the order
+I would try them:
+
+1. **Check every shown passage, sentence by sentence.** Details like these sit in passages the current check does not ask about.
+2. **Ask Jev before dispatching on a no-move.** On borderline note-saving requests Jev leans the right way but under the confidence bar, so the request goes to the agent; asking "can Nyx's own tools finish this?" first would keep those fast and learnable as habits.
+3. **Make the checklist fire more reliably.** On Python it sent the gaps to the agent in half of the runs; in the others Jev judged the checklist answered.
+
+### Method
+
+**Rubric.** Google AI Mode's own answer to each question, pruned to the items that directly answer a sub-question the
+user asked: 29 in total (Python 7, fiber 6, ETIAS 7, Mushoku Tensei 9). Paraphrase counts; a fact stated wrongly does not.
+
+**Isolation.** Codex ran with `--ignore-user-config` and Claude Code with local settings only and no MCP servers, each
+in an empty directory. Nyx's questions ran with no recent turns and a vault cleared of notes, habits and fixture files,
+so no answer saw an earlier one.
+
+**Cost.** List prices from token counts: Jev $0.042 per million input tokens (the only Jev price available), Mercury
+$0.04/$0.15, Luna $1/$6, Sol $5/$30, Astra $10/$50 per million; Claude runs as reported by Claude Code. Nyx's cost
+includes the Jev calls inside jev-digest and the agent dispatch. Mercury 2.5 is priced at its launch discount; at the
+standard $0.20/$0.75, each Nyx run costs under a cent more.
+
+**Runs.** Nyx's figures are its best of three runs with the release default; one run per full agent. Four questions
+and one scorer make this a proof of concept, not a benchmark to generalise from.
+
+Source data: [bench/questions.md](bench/questions.md) and [bench/hand-scores.json](bench/hand-scores.json); every Nyx
+run's decisions, including each dispatch, are in its trace. The replays are generated from those traces.
+
+### Acceptance
 
 Eight of the eleven acceptance rows pass in every run, including a real dispatch whose files the harness finds in
 the agent's folder. The three habit-learning rows fail: on borderline rounds Jev is not confident enough to act, the
