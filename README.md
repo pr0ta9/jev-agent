@@ -36,12 +36,16 @@ question). Google AI Mode's own answer to each question is the rubric: its essen
 answer what was asked, number 29 in total. One scorer, the author, read every reply and scored it by hand; paraphrase
 counts, a fact stated wrongly does not. Every agent ran isolated from local configuration.
 
+![Key facts found against total time for Nyx and five full agents](docs/results.png)
+
+Nyx run by Jev alone, with Mercury writing and no Codex model at all, got 25 of 29 essential facts in 47 seconds for
+five cents. With nous, the Codex agent Jev dispatches for gaps, it got 27 of 29 in 104 seconds for $0.24: half the
+time of the fastest agent that got all 29, for under a third of its cost.
+
 | agent | essential facts /29 | seconds, 4 questions | cost |
 |---|---:|---:|---:|
-| **Nyx, release default, run 1** | 27 | 104 | $0.24 |
-| **Nyx, release default, run 2** | 23 | 90 | about $0.10 |
-| **Nyx, release default, run 3** | 15 | 62 | about $0.05 |
-| Nyx, Mercury + Sol nous | 24 | 105 | $0.63 |
+| **Nyx, Jev only** (best of three runs) | 25 | 47 | $0.05 |
+| **Nyx with nous** (best of three runs; the release default) | 27 | 104 | $0.24 |
 | Codex Luna | 29 | 210 | $0.79 |
 | Codex Sol | 29 | 298 | $4.44 |
 | Claude Fable | 29 | 438 | $3.48 |
@@ -49,13 +53,38 @@ counts, a fact stated wrongly does not. Every agent ran isolated from local conf
 | Claude Sonnet | 22 | 75 | $0.34 |
 | Claude Haiku | 20 | 72 | $0.19 |
 
-What this shows: the three Nyx runs score 27, 23 and 15 of 29, a median of 23. At its best, Nyx gets 27 of 29
-essential facts in half the time of the fastest full agent for under a third of the cost; the median run gives up six
-facts to Codex Luna in under half the time for about an eighth of the cost. Run 3 scored 15 because the public search
-engines behind SearXNG were rate-limited on the ETIAS question: Nyx said so and asked to retry instead of answering
-from nothing, which scores 0 of 7 there. It answers from one web digest, checks its own reply against an expert's
-checklist of what a complete answer needs, and hands only the gaps to a Codex agent: in runs 1 and 2, one of the four
-questions each.
+Both Nyx variants have Jev decide every step and Mercury 2.5 write every reply. "Jev only" never calls a Codex model;
+"with nous" adds the expert checklist and dispatches Codex Luna for the gaps Jev confirms. Each full agent ran once;
+Claude Sonnet invented its Mushoku Tensei answer, and Claude Haiku ran with one added instruction to answer general
+questions, because inside Claude Code it otherwise refused two as off-topic.
+
+[![Nyx answering the ETIAS question](docs/media/nyx-etias.gif)](docs/media/nyx-etias.mp4)
+
+The ETIAS question, replayed from the run's own trace: every decision Jev made, each tool call and the writer.
+16.5 s, 7 of 7 essential facts, no agent needed.
+
+[![Nyx answering the Python question with one agent dispatch](docs/media/nyx-python.gif)](docs/media/nyx-python.mp4)
+
+The Python question: the expert checklist finds two gaps, Jev dispatches a Codex agent, and the final answer scores
+7 of 7. Long waits are shortened on screen; every time shown is real. Click either replay for the full-quality video.
+
+<details>
+<summary>Every run of every configuration</summary>
+
+| agent | essential facts /29 | seconds, 4 questions | cost |
+|---|---:|---:|---:|
+| Nyx with nous, run 1 | 27 | 104 | $0.24 |
+| Nyx with nous, run 2 | 23 | 90 | about $0.10 |
+| Nyx with nous, run 3 (search engines rate-limited on ETIAS; Nyx asked to retry) | 15 | 62 | about $0.05 |
+| Nyx, Jev only, run 1 (search engines rate-limited on fibre) | 19 | 55 | $0.03 |
+| Nyx, Jev only, run 2 | 25 | 47 | $0.05 |
+| Nyx, Jev only, run 3 | 24 | 63 | $0.03 |
+| Nyx, dispatch without the checklist, runs 1 to 3 | 23, 22, 22 | 52, 50, 46 | $0.05 each |
+| Nyx, Mercury + Sol nous | 24 | 105 | $0.63 |
+| Nyx, Mercury + Astra nous | 23 | 176 | $1.68 |
+
+</details>
+
 Costs are list prices from token counts; Claude runs are what Claude Code reports. Mercury 2.5 is priced at its
 launch discount ($0.04/$0.15 per million tokens); at the standard $0.20/$0.75, each Nyx run costs under a cent more.
 Four questions and one scorer is a proof of concept, not a benchmark. Method, per-question results, where each
